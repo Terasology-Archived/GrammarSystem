@@ -1,0 +1,9 @@
+{
+    "id" : "GrammarSystem",
+    "version" : "0.1.0",
+    "author" : "Skaldarnar",
+    "displayName" : "Grammar System",
+    "description" : "Grammar System for procedural structure generation. Basis for the Procedural Architecture Grammar",
+    "dependencies" : [],
+    "isServerSideOnly" : false
+}
