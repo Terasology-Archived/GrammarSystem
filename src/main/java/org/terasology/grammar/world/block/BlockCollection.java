@@ -16,6 +16,7 @@
 package org.terasology.grammar.world.block;
 
 import com.google.common.collect.Maps;
+import org.terasology.math.geom.Vector3f;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.world.block.Block;
 
@@ -36,6 +37,13 @@ public class BlockCollection {
     public Map<Vector3i, Block> getBlocks() {
         return Collections.unmodifiableMap(blocks);
     }
+
+    public Map<Vector3i, Block> getBlocks(Vector3f offset) {
+        HashMap<Vector3i, Block> res = Maps.newHashMapWithExpectedSize(blocks.size());
+        blocks.entrySet().forEach(entry -> res.put(entry.getKey().add(new Vector3i(offset)), entry.getValue()));
+        return Collections.unmodifiableMap(res);
+    }
+
 
     /**
      * Sets the block at the given position to the specfic block type.

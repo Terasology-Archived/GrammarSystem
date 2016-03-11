@@ -58,7 +58,7 @@ public class BuildingCommands extends BaseComponentSystem {
     @In
     private WorldProvider worldProvider;
 
-    @Command(shortDescription = "Building generation test")
+    @Command(shortDescription = "Building generation test", runOnServer = true)
     public void build() {
         console.addMessage("Starting building a default structure ...");
 
@@ -68,7 +68,7 @@ public class BuildingCommands extends BaseComponentSystem {
         Vector3f targetPos = cameraTargetSystem.getHitPosition();
 
         if (worldProvider != null) {
-            worldProvider.getWorldEntity().send(new PlaceBlocks(collection.getBlocks()));
+            worldProvider.getWorldEntity().send(new PlaceBlocks(collection.getBlocks(targetPos)));
         }
 
         console.addMessage("Finished ...");
@@ -89,16 +89,7 @@ public class BuildingCommands extends BaseComponentSystem {
         console.addMessage(builder.toString());
 
         Vector3f targetPos = cameraTargetSystem.getHitPosition();
-        //Camera camera = CoreRegistry.get(WorldRenderer.class).getActiveCamera();
-        //Vector3f attachPos = camera.getPosition();
-        //Vector3f offset = camera.getViewingDirection();
-
-        //offset.scale(3);
-        //attachPos.add(offset);
-
-        //BuildingGenerator generator = setUp();
         BuildingGenerator generator = complexBuildingGenerator();
-        //BuildingGenerator generator = testGenerator();
 
         console.addMessage("Created Building Generator. Starting building process ...");
         long time = System.currentTimeMillis();
@@ -111,13 +102,7 @@ public class BuildingCommands extends BaseComponentSystem {
         console.addMessage(builder.toString());
 
         if (worldProvider != null) {
-            // TODO
-            worldProvider.getWorldEntity().send(new PlaceBlocks(collection.getBlocks()));
-//            collection.getBlocks().forEach(
-//                    (position, block) -> {
-//                        worldProvider.setBlock(position.add(new Vector3i(targetPos)), block);
-//                    }
-//            );
+            worldProvider.getWorldEntity().send(new PlaceBlocks(collection.getBlocks(targetPos)));
         }
 
         console.addMessage("Finished ...");
@@ -130,7 +115,7 @@ public class BuildingCommands extends BaseComponentSystem {
         ShapeSymbol floor = new ShapeSymbol("floor");
         ShapeSymbol roof = new ShapeSymbol("roof");
         // used Set rules
-        SetRule setStone = new SetRule(new BlockUri("core:CobbleStone"));
+        SetRule setStone = new SetRule(new BlockUri("core:cobblestone"));
         SetRule setPlank = new SetRule(new BlockUri("core:plank"));
         // used split rule (split walls)
         SplitArg walls = new SplitArg(SplitArg.SplitType.WALLS, setStone);
@@ -170,7 +155,7 @@ public class BuildingCommands extends BaseComponentSystem {
         ShapeSymbol middlePartWalls = new ShapeSymbol("middle_part_walls");
         //================================================
         SetRule setStone = new SetRule(new BlockUri("core:stone"));
-        SetRule setCobblestone = new SetRule(new BlockUri("core:CobbleStone"));
+        SetRule setCobblestone = new SetRule(new BlockUri("core:cobblestone"));
         SetRule setOaktrunk = new SetRule(new BlockUri("core:OakTrunk"));
         SetRule setGlass = new SetRule(new BlockUri("core:glass"));
         SetRule setPlank = new SetRule(new BlockUri("core:plank"));
