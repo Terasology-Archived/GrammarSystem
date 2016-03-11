@@ -1,9 +1,13 @@
 {
     "id" : "GrammarSystem",
-    "version" : "0.1.0",
+    "version" : "0.2.0-SNAPSHOT",
     "author" : "Skaldarnar",
     "displayName" : "Grammar System",
     "description" : "Grammar System for procedural structure generation. Basis for the Procedural Architecture Grammar",
-    "dependencies" : [],
+    "dependencies" : [
+        {
+            "id": "Core", "minVersion": "1.0.0"
+        }
+    ],
     "isServerSideOnly" : false
 }

@@ -94,10 +94,10 @@ assignment
       )
       {
         if (p >= 0) {
-          $succ = new SetSuccessor($block_uri.uri, p);
+          $succ = new SetSuccessor($block_uri.urn, p);
         }
         else {
-          $succ = new SetSuccessor($block_uri.uri);
+          $succ = new SetSuccessor($block_uri.urn);
         }
       }
     // second alternative: the successor is a subdiv command
@@ -177,7 +177,7 @@ direction returns [Direction direction]
 /* Contsructs a BlockUri from the given String.
  * For parsing the constructor of BlockUri is used.
  */
-block_uri returns [BlockUri uri]
+block_uri returns [BlockUri urn]
       : {StringBuilder b  = new StringBuilder();}
         ^(BLOCK_URI packageName=ID familyName=ID
             { b.append($packageName.text + ':' + $familyName.text); }
@@ -188,7 +188,7 @@ block_uri returns [BlockUri uri]
               { b.append( '.' + $blockIdentifier.text); }
             )?
           )
-          { $uri = new BlockUri(b.toString()); }
+          { $urn = new BlockUri(b.toString()); }
       ;
 
 
